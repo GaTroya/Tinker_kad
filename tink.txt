@@ -1,0 +1,93 @@
+const int dled1 = 11; 
+const int d1 = 12;     
+const int d2 = 13;    
+
+bool isBlinking = false;
+
+void setup() {
+  
+  pinMode(dled1, OUTPUT);
+  pinMode(d1, OUTPUT);
+  pinMode(d2, OUTPUT);
+
+  Serial.begin(9600);
+  Serial.println("Control de luces. Usa numero del 1 al 9.");
+}
+
+void loop() {
+
+  if (Serial.available() > 0) {
+    
+    char input = Serial.read();
+
+    switch (input) {
+      case '1': 
+        digitalWrite(dled1, HIGH);
+        Serial.println("Luz verde encendida.");
+        break;
+      
+      case '2': 
+        digitalWrite(dled1, LOW);
+        Serial.println("Luz verde apagada.");
+        break;
+
+      case '3': 
+        digitalWrite(d1, HIGH);
+        Serial.println("Luz roja encendida.");
+        break;
+
+      case '4': 
+        digitalWrite(d1, LOW);
+        Serial.println("Luz roja apagada.");
+        break;
+
+      case '5': 
+        digitalWrite(d2, HIGH);
+        Serial.println("Luz amarilla encendida.");
+        break;
+
+      case '6': 
+        digitalWrite(d2, LOW);
+        Serial.println("Luz amarilla apagada.");
+        break;
+
+      case '7': 
+        digitalWrite(dled1, HIGH);
+        digitalWrite(d1, HIGH);
+        digitalWrite(d2, HIGH);
+        Serial.println("Todas las luces encendidas.");
+        break;
+
+      case '8': 
+        digitalWrite(dled1, LOW);
+        digitalWrite(d1, LOW);
+        digitalWrite(d2, LOW);
+        Serial.println("Todas las luces apagadas.");
+        break;
+
+      case '9': 
+        isBlinking = !isBlinking;
+        if (isBlinking) {
+          Serial.println("Modo intermitente activado.");
+        } else {
+          Serial.println("Modo intermitente desactivado.");
+        }
+        break;
+
+      default:
+        Serial.println("Opcion no disponible.");
+        break;
+    }
+  }
+
+  if (isBlinking) {
+    digitalWrite(dled1, HIGH);
+    digitalWrite(d1, HIGH);
+    digitalWrite(d2, HIGH);
+    delay(500);
+    digitalWrite(dled1, LOW);
+    digitalWrite(d1, LOW);
+    digitalWrite(d2, LOW);
+    delay(500);
+  }
+}
