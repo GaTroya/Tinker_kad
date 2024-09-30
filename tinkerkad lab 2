@@ -1,0 +1,84 @@
+int LED1_red=    2;
+int LED1_green=  3;
+int LED1_blue=   4;
+int LED2_red=    5;
+int LED2_green=  6;
+int LED2_blue=   7;
+int LED3_red=    8;
+int LED3_green=  9;
+int LED3_blue=   10;
+int ons = 11;
+void setup(){
+
+  pinMode(LED1_red, OUTPUT);
+  pinMode(LED1_green, OUTPUT);
+  pinMode(LED1_blue, OUTPUT);
+  pinMode(LED2_red, OUTPUT);
+  pinMode(LED2_green, OUTPUT);
+  pinMode(LED2_blue, OUTPUT);
+  pinMode(LED3_red, OUTPUT);
+  pinMode(LED3_green, OUTPUT);
+  pinMode(LED3_blue, OUTPUT);
+ 
+}
+
+void loop(){
+  
+  if((digitalRead(ons) == true)){ 
+  
+    while((digitalRead(ons) == true)){
+      led1_colors(0,255,0);
+      led2_colors(255,0,0);
+      led3_colors(255,0,0);
+      delay(1000);
+      led1_colors(255,0,0);
+      led2_colors(0,255,0);
+      led3_colors(255,0,0);
+      delay(1000);
+      led1_colors(255,0,0);
+      led2_colors(255,0,0);
+      led3_colors(0,255,0);  
+      delay(1000);
+      
+     }
+  }else if((digitalRead(ons) == false)){
+      wton();
+      
+       }
+
+}
+void led1_colors(int r, int g, int b){
+  analogWrite(LED1_red,  r);
+  analogWrite(LED1_green,  g);
+  analogWrite(LED1_blue,  b);
+
+}
+
+void led2_colors(int r, int g, int b){
+  analogWrite(LED2_red,  r);
+  analogWrite(LED2_green,  g);
+  analogWrite(LED2_blue,  b);
+
+}
+
+void led3_colors(int r, int g, int b){
+  analogWrite(LED3_red,  r);
+  analogWrite(LED3_green,  g);
+  analogWrite(LED3_blue,  b);
+
+}
+
+
+void wton(){
+   while((digitalRead(ons) == false)){
+     
+      led1_colors(255,255,0);
+      led2_colors(255,255,0);
+      led3_colors(255,255,0);
+      delay(500);
+      led1_colors(0,0,0);
+      led2_colors(0,0,0);
+      led3_colors(0,0,0);
+      delay(500);
+   }
+}
